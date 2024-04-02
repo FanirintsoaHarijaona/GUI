@@ -22,6 +22,10 @@ layout = [
     ],
 ]
 
+window = sg.Window("Taquin",layout,size=(320,320),element_justification='c')
+
+default_button_color = sg.theme_button_color_background()
+
 directory = "assets/numero-"
 extension = ".png"
 
@@ -54,8 +58,6 @@ def update(window,node):
     window["BUTTON-8"].update(image_filename=directory+str(node[2][1])+extension)
     window["BUTTON-9"].update(image_filename=directory+str(node[2][2])+extension)
 
-window = sg.Window("Taquin",layout,size=(320,320),element_justification='c')
-
 def main():
     t = Taquin()
     node = t.get_node()
@@ -69,6 +71,8 @@ def main():
                 t.shuffle()
                 node = t.get_node()
                 update(window,node)
+                for key in window.AllKeysDict:
+                    window[key].update(button_color=default_button_color)
             elif event =="resolve":
                 print("display node")
                 solution = transition(t,node)
@@ -78,7 +82,8 @@ def main():
                     window.refresh()
                     time.sleep(1)
                 for key in window.AllKeysDict:
-                    window[key].update(button_color='yellow') 
+                    window[key].update(button_color='yellow')
+                sg.popup("Game resolved") 
             else:
                pass
 
