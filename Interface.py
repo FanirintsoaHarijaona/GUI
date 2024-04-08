@@ -22,7 +22,8 @@ layout = [
     ],
 ]
 
-window = sg.Window("Taquin",layout,size=(320,320),element_justification='c')
+window = sg.Window("Taquin",layout,size=(320,320),element_justification='c',
+                    return_keyboard_events=True,use_default_focus=False)
 
 default_button_color = sg.theme_button_color_background()
 
@@ -65,7 +66,8 @@ def main():
     running = True 
     while running:
             event, values = window.read()
-            if event == sg.WIN_CLOSED or event == 'exit':
+            if event == sg.WIN_CLOSED or event =="Escape:9" :
+                print("Escape the game")
                 running = False
             elif event =="shuffle":
                 t.shuffle()
@@ -83,7 +85,32 @@ def main():
                     time.sleep(1)
                 for key in window.AllKeysDict:
                     window[key].update(button_color='yellow')
-                sg.popup("Game resolved") 
+                sg.popup("Game solved") 
+            elif event == "Up:111":
+                t.moveUp()
+                node = t.get_node()
+                update(window,node)
+                for key in window.AllKeysDict:
+                    window[key].update(button_color=default_button_color)
+            elif event == "Down:116":
+                t.moveDown()
+                node = t.get_node()
+                update(window,node)
+                for key in window.AllKeysDict:
+                    window[key].update(button_color=default_button_color)
+            elif event =="Left:113":
+                t.moveLeft()
+                node = t.get_node()
+                update(window,node)
+                for key in window.AllKeysDict:
+                    window[key].update(button_color=default_button_color)
+
+            elif event =='Right:114':
+                t.moveRight()
+                node = t.get_node()
+                update(window,node)
+                for key in window.AllKeysDict:
+                    window[key].update(button_color=default_button_color)
             else:
                pass
 

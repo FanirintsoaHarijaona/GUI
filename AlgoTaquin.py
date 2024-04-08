@@ -90,6 +90,32 @@ class Taquin:
             self.node[row][col+1] = self.node[row][col]
             self.node[row][col] = tmp
 
+    def moveUp(self):
+        row,col = self.get_position_zero()
+        if row > 0:
+            tmp = self.node[row-1][col]
+            self.node[row-1][col] = self.node[row][col]
+            self.node[row][col] = tmp
+
+    def moveDown(self):
+        row,col = self.get_position_zero()
+        if row < 2:
+            tmp = self.node[row+1][col]
+            self.node[row+1][col] = self.node[row][col]
+            self.node[row][col] = tmp
+    def moveLeft(self):
+        row,col = self.get_position_zero()
+        if col > 0:
+            tmp = self.node[row][col-1]
+            self.node[row][col-1] = self.node[row][col]
+            self.node[row][col] = tmp
+    def moveRight(self):
+        row,col = self.get_position_zero()
+        if col < 2:
+            tmp = self.node[row][col+1]
+            self.node[row][col+1] = self.node[row][col]
+            self.node[row][col] = tmp
+
     def __str__(self):
         string = ""
         for row in range(3):
